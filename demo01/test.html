@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let videoDom = document.createElement("video");
+    videoDom.src = "./Test.mp4";
+    videoDom.style.width = "900px";
+    videoDom.style.height = "675px";
+
+    let btnPlayAndPause = document.createElement("div");
+    btnPlayAndPause.style.color = "#fff";
+    btnPlayAndPause.style.textAlign = "center";
+    btnPlayAndPause.style.position = "absolute";
+    btnPlayAndPause.style.top = btnPlayAndPause.style.left = "0px";
+    btnPlayAndPause.style.width = videoDom.style.width;
+    btnPlayAndPause.style.height = btnPlayAndPause.style.lineHeight = videoDom.style.height;
+    btnPlayAndPause.style.cursor = "pointer";
+    btnPlayAndPause.style.fontSize = "30px";
+    btnPlayAndPause.style.zIndex = 2;
+    btnPlayAndPause.innerText = "play";
+    document.body.appendChild(btnPlayAndPause);
+
+    btnPlayAndPause.addEventListener("click", function() {
+        if(btnPlayAndPause.innerText === "play"){
+            videoDom.play();
+        } else {
+            videoDom.pause();
+        }
+    });
+
+    videoDom.addEventListener("canplay", function() {
+        renderVideoFrame(videoDom);
+    });
+
+    // 监听开始播放
+    videoDom.addEventListener('play', function() {
+        console.log("开始播放");
+        btnPlayAndPause.innerText = "pauseOrStop";
+
+        startRender();
+    });
+
+    // 监听播放暂停
+    videoDom.addEventListener('pause', function() {
+        console.log("播放暂停");
+        btnPlayAndPause.innerText = "play";
+
+        stopRender();
+    });
+
+    // 监听播放结束
+    videoDom.addEventListener('stop', function() {
+        console.log("播放结束");
+        btnPlayAndPause.innerText = "play";
+
+        stopRender();
+    });
+
+    let timerId;
+    function startRender() {
+        timerId = requestAnimationFrame(updateRender);
+    }
+    function updateRender() {
+        renderVideoFrame(videoDom);
+        timerId = requestAnimationFrame(updateRender);
+    }
+    function stopRender() {
+        cancelAnimationFrame(timerId);
+    }
+
+    let asciiList = ["慈", "肖", "我", "儿", " "]
+    const gap = 15;
+    function renderVideoFrame(videoDom) {
+        let videoSize = {
+            width: parseFloat(videoDom.videoWidth),
+            height: parseFloat(videoDom.videoHeight)
+        };
+
+        let canvas = document.querySelector("#canvas");
+
+        if(!canvas) {
+            canvas = document.createElement("canvas");
+            canvas.id = "canvas";
+            canvas.style.width = videoDom.style.width;
+            canvas.style.height = videoDom.style.height;
+            canvas.style.position = "absolute";
+            canvas.style.zIndex = 1;
+            canvas.style.left = canvas.style.top = "0";
+            canvas.width = videoSize.width;
+            canvas.height = videoSize.height;
+
+            document.body.appendChild(canvas);
+        }
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(videoDom, 0, 0, videoSize.width, videoSize.height);
+
+        let imgData = ctx.getImageData(0, 0, videoSize.width, videoSize.height).data;
+        ctx.clearRect(0,0,videoSize.width,videoSize.height);
+        ctx.font=gap+"px Verdana";
+        for(let h=0; h<videoSize.height; h+=gap) {
+            for(let w=0; w<videoSize.width; w+=gap) {
+                let position = (videoSize.width * h + w) * 4;
+                let r = imgData[position], g = imgData[position + 1], b = imgData[position + 2];
+
+                // 将RGB色转换为灰度值
+                let gray = (r*30 + g*59 + b*11 + 50) / 100;
+                let i = Math.min(asciiList.length-1, parseInt(gray / (255 / asciiList.length)))
+                ctx.fillText(asciiList[i], w, h)
+            }
+        }
+    }
+</script>
+</html>
