@@ -1,7 +1,7 @@
 单词符号  种类
 {  分界符
 /*This a test program.*/  注释
-/int  标识符
+int  保留字
 abc  标识符
 ;  分界符
 int  保留字

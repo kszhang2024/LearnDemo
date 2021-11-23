@@ -186,6 +186,7 @@ function dfa(strInputFilePath, strOutputPath) {
                 writeData(strOutputPath, buf1, "5");
                 buf1 = "";
                 state = 0;
+                break;
               case "*":
                 buf1 += txtData;
                 break;
@@ -199,9 +200,10 @@ function dfa(strInputFilePath, strOutputPath) {
       // 遍历完一行之后，状态没有回到初态。
       if(state !== 0) {
         error(lineNo, buf1, buf1);
-        state = 0;
-        buf1 = "";
       }
+
+      state = 0;
+      buf1 = "";
     });
   } catch (e) {
     console.log("error: " + e.message);
