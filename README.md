@@ -8,9 +8,6 @@
 ## bianyi
 《编译原理》：词法分析、语法分析、语义分析、虚拟机
 
-## DataAn
-《数据分析》实验课
-
 ## JestLearn
 Jest 学习demo
 
