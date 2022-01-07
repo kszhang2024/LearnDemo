@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // 组件的优化
+      // class Sub extends React.PureComponent {
+      //   // shouldComponentUpdate(nextProps, nextState) {
+      //   //   return nextProps.name !== this.props.name;
+      //   // }
+
+      //   render() {
+      //     console.log('sub render');
+      //     return (
+      //       <div>
+      //         sub
+      //       </div>
+      //     );
+      //   }
+      // }
+
+      const Sub = React.memo((params) => {
+        console.log("sub render");
+
+        return <div>sub</div>;
+      });
+
+      // const Sub = (params) => {
+      //   console.log("sub render");
+
+      //   return <div>sub</div>;
+      // };
+
+      class App extends React.Component {
+        state = {
+          count: {
+            value: 0
+          },
+        };
+
+        onClick = () => {
+          this.setState((state) => {
+            this.state.count.value += 1;
+
+            return this.state;
+          });
+        };
+
+        callback = () => {};
+
+        render() {
+          console.log("render");
+          const { count } = this.state;
+
+          return (
+            <div>
+              <Sub cb={count}/>
+              <p>{count.value}</p>
+              <button onClick={this.onClick}>button</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

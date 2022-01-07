@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const App = (params) => {
+          const r = React.useRef(0);
+          const [n, setN] = React.useState(0);
+          
+          // Effect初始化的时候会执行一次，所以current的初始值为1
+          // Effect总是在render后才执行，而这时候current刚刚变成最新的
+          React.useEffect(() => {
+              r.current += 1;
+              if (r.current > 1) {
+                  console.log("r.current:" + r.current);
+                  console.log("n:" + n);
+              }
+          });
+
+          return (
+              <div className="App">
+                <h1>n:{n}</h1>
+                <h1>r.current{r.current}</h1>
+                <button
+                  onClick={() => {
+                      setN(n + 1);
+                  }}
+                >
+                  + 1
+                </button>
+              </div>
+          );
+      };
+      
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

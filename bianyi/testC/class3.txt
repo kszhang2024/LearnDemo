@@ -1,0 +1,16 @@
+{
+int sum;
+int mul;
+int a;
+int i;
+sum = 0;
+mul = 1;
+for (i=1; i <= 10; i=i+1)
+{
+    read a;
+    sum = a + sum;
+    mul = a * mul;
+}
+write sum;
+write mul;
+}

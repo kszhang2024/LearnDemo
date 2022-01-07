@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const withSub2 = (Comp) => {
+        return class toSub2 extends React.Component {
+          componentDidMount() {
+            console.log(2);
+          }
+
+          render() {
+            return <Comp />;
+          }
+        };
+      };
+
+      const withSub3 = (Comp) => {
+        return class toSub3 extends React.Component {
+          componentDidMount() {
+            console.log(3);
+          }
+
+          render() {
+            return <Comp />;
+          }
+        };
+      };
+
+      class Sub extends React.Component {
+        componentDidMount() {
+          console.log(1);
+        }
+
+        render() {
+          return <div>sub</div>;
+        }
+      }
+
+      const Sub2 = withSub2(Sub);
+      const Sub3 = withSub3(Sub2);
+
+      const App = () => {
+        return (
+          <div>
+            <Sub3 />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class Cat extends React.Component {
+        render() {
+          const mouse = this.props.mouse;
+          return (
+            <div
+              style={{
+                position: "absolute",
+                left: mouse.x,
+                top: mouse.y,
+                width: "100px",
+                height: "100px",
+                backgroundColor: "#ddd",
+                borderRadius: "50%",
+              }}
+            ></div>
+          );
+        }
+      }
+
+      class RecordPos extends React.Component {
+        render() {
+          const pos = this.props.pos;
+
+          return (
+            <div>
+              <p>
+                The current mouse position is ({pos.x}, {pos.y})
+              </p>
+            </div>
+          );
+        }
+      }
+
+      class Mouse extends React.Component {
+        constructor(props) {
+          super(props);
+          this.handleMouseMove = this.handleMouseMove.bind(this);
+          this.state = { x: 0, y: 0 };
+        }
+
+        handleMouseMove(event) {
+          this.setState({
+            x: event.clientX,
+            y: event.clientY,
+          });
+        }
+
+        render() {
+          return (
+            <div style={{ height: "100vh" }} onMouseMove={this.handleMouseMove}>
+              {this.props.render(this.state)}
+            </div>
+          );
+        }
+      }
+
+      function withMouse(Comp1, Comp2) {
+        return class toMouse extends React.Component {
+          renderTheCat = (state) => (
+                  <React.Fragment>
+                    <Comp1 mouse={state} />
+                    <Comp2 pos={state} />
+                  </React.Fragment>
+                )
+
+          render() {
+            return (
+              <Mouse
+                render={this.renderTheCat}
+              />
+            );
+          }
+        };
+      }
+
+      const WithMouse = withMouse(Cat, RecordPos);
+
+      class MouseTracker extends React.PureComponent {
+        render() {
+          return (
+            <div>
+              <h1>移动鼠标!</h1>
+              <WithMouse></WithMouse>
+            </div>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <MouseTracker />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

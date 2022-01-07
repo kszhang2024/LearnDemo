@@ -1,0 +1,56 @@
+"program": {
+"declarationList": ε, int
+"statementList": if, while, for, read, write, {, ID, ;, ε  
+"declarationStat": int
+"statement": if, while, for, read, write, {, ID, ;
+"ifStat": if
+"ifOther": else, ε
+"whileStat": while
+"forStat": for
+"readStat": read
+"writeStat": write
+"compoundStat": {
+"assignmentExpression": ID
+"assignmentStat": ID
+"boolExpression": (, ID, NUM
+"expressionOther": >, <, >=, <=, ==, !=
+"arithmeticExpression": (, ID, NUM
+"arithmeticExpression1": +, -, ε
+"term": (, ID, NUM
+"term1": *, /, ε
+"factor": (, ID, NUM
+
+
+ this.firstSet = {
+      program: ["{"],
+      declarationList: ["ε", "int"],
+      statementList: [
+        "if",
+        "while",
+        "for",
+        "read",
+        "write",
+        "{",
+        "ID",
+        ";",
+        "ε",
+      ],
+      declarationStat: ["int"],
+      statement: ["if", "while", "for", "read", "write", "{", "ID", ";"],
+      ifStat: ["if"],
+      ifOther: ["else", "ε"],
+      whileStat: ["while"],
+      forStat: ["for"],
+      readStat: ["read"],
+      writeStat: ["write"],
+      compoundStat: ["{"],
+      assignmentExpression: ["ID"],
+      assignmentStat: ["ID"],
+      boolExpression: ["(", "ID", "NUM"],
+      expressionOther: [">", "<", ">=", "<=", "==", "!="],
+      arithmeticExpression: ["(", "ID", "NUM"],
+      arithmeticExpression1: ["+", "-", "ε"],
+      term: ["(", "ID", "NUM"],
+      term1: ["*", "/", "ε"],
+      factor: ["(", "ID", "NUM"],
+    };

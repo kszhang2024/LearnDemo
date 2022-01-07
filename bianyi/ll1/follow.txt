@@ -1,0 +1,175 @@
+"program": #
+"declarationList": if, while, for, read, write, {, ID, ;, #
+"statementList": #, }
+"declarationStat": int, if, while, for, read, write, {, ID, ;, #
+"statement": if, while, for, read, write, {, ID, ;, #, }, else
+"ifStat": if, while, for, read, write, {, ID, ;, #, }, else
+"ifOther": if, while, for, read, write, {, ID, ;, #, }, else
+"whileStat": if, while, for, read, write, {, ID, ;, #, }, else
+"forStat": if, while, for, read, write, {, ID, ;, #, }, else
+"readStat": if, while, for, read, write, {, ID, ;, #, }, else
+"writeStat": if, while, for, read, write, {, ID, ;, #, }, else
+"compoundStat": if, while, for, read, write, {, ID, ;, #, }, else
+"assignmentExpression": ;, )
+"assignmentStat": if, while, for, read, write, {, ID, ;, #, }, else
+"boolExpression": ), ;
+"expressionOther": ), ;
+"arithmeticExpression": ;, ), >, <, >=, <=, ==, !=
+"arithmeticExpression1": ;, ), >, <, >=, <=, ==, !=
+"term": +, -, ;, ), >, <, >=, <=, ==, !=
+"term1": +, -, ;, ), >, <, >=, <=, ==, !=
+"factor": *, /, +, -, ;, ), >, <, >=, <=, ==, !=
+
+
+this.followSet = {
+    program: ["#"],
+    declarationList: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    ],
+    statementList: ["#", "}"],
+    declarationStat: [
+    "int",
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    ],
+    statement: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    ifStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    ifOther: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    whileStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    forStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    readStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    writeStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    compoundStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    assignmentExpression: [";", ")"],
+    assignmentStat: [
+    "if",
+    "while",
+    "for",
+    "read",
+    "write",
+    "{",
+    "ID",
+    ";",
+    "#",
+    "}",
+    "else",
+    ],
+    boolExpression: [")", ";"],
+    expressionOther: [")", ";"],
+    arithmeticExpression: [";", ")", ">", "<", ">=", "<=", "==", "!="],
+    arithmeticExpression1: [";", ")", ">", "<", ">=", "<=", "==", "!="],
+    term: ["+", "-", ";", ")", ">", "<", ">=", "<=", "==", "!="],
+    term1: ["+", "-", ";", ")", ">", "<", ">=", "<=", "==", "!="],
+    factor: ["*", "/", "+", "-", ";", ")", ">", "<", ">=", "<=", "==", "!="],
+};

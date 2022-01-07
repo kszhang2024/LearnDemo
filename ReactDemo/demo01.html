@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let AppContext = React.createContext();
+      
+      class Foo extends React.Component {
+          render() {
+              return (
+                <AppContext.Consumer>
+                    { value => <div>{value}</div> }
+                </AppContext.Consumer>
+              );
+          }
+      };
+
+      class Bar extends React.Component {
+          static contextType = AppContext;
+
+          render() {
+            const value = this.context;
+
+            return (
+                <div>{ value }</div>
+            );
+          }
+      };
+
+      const Baz = (props) => {
+        const value = React.useContext(AppContext);
+
+        return (
+            <div>{ value }</div>
+        );
+      };
+
+      const Middle = (props) => {
+        return (
+          <div>
+            <Foo />
+            <Bar />
+            <Baz />
+          </div>
+        );
+      };
+
+      const App = (params) => {
+        return (
+            <AppContext.Provider value="xiaozhang">
+              <Middle />
+            </AppContext.Provider>
+        );
+      };
+
+      ReactDOM.render(
+          <App />, 
+          document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>

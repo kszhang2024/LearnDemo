@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let jadeBird = {
+        customerList: [],
+        dengji(fn) {
+            this.customerList.push(fn);
+        },
+        start() {
+            console.log('开班了');
+            this.customerList.forEach(item => {
+                item();
+            });
+        }
+    }
+
+    function tongzhizs() {
+        console.log("张三，来报到吧");
+    }
+
+    function tongzhils() {
+        console.log("李四，来报到吧");
+    }
+
+    function tongzhiww() {
+        console.log("王五老师，请准备课件来上课");
+    }
+
+    function tongzhild() {
+        console.log("领导，欢迎帮我们主持开班仪式");
+    }
+
+    jadeBird.dengji(tongzhild);
+    jadeBird.dengji(tongzhizs);
+    jadeBird.dengji(tongzhils);
+    jadeBird.dengji(tongzhiww);
+    jadeBird.start();
+</script>
+</html>

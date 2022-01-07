@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Test() {
+        const [n, setN] = React.useState(0);
+
+        React.useEffect(() => {
+          console.log("useEffect1");
+        });
+
+        React.useEffect(() => {
+          console.log("useEffect2 n改变之后执行");
+        }, [n]);
+
+        React.useEffect(() => {
+          console.log("useEffect3");
+          return () => {
+            console.log("useEffect3 组件卸载了");
+          };
+        }, []);
+
+        return (
+          <div>
+            <div>n: {n}</div>
+            <button onClick={() => setN(n + 1)}>n + 1</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [isShow, setIsShow] = React.useState(true);
+        return (
+          <div>
+            {isShow && <Test></Test>}
+            <button onClick={() => setIsShow(false)}>隐藏Test</button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class SubTest extends React.PureComponent {
+        render() {
+          console.log("SubTest render");
+          return <div>subTest</div>;
+        }
+      }
+
+      //父组件
+      class Test extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            count: 0,
+            obj: { name: 0 },
+          };
+        }
+        // addCount = () => {
+        //   this.setState({
+        //     count: this.state.count + 1,
+        //     obj: { name: 1 },
+        //   });
+        // };
+        addCount = () => {
+          this.setState({
+            count: this.state.count + 1,
+          });
+        };
+        render() {
+          console.log("Test render");
+          const { count, obj } = this.state;
+          return (
+            <div>
+              count:{count}
+              <SubTest obj={obj} />
+              <button onClick={this.addCount}>button</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Test />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
